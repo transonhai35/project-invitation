@@ -1,6 +1,12 @@
 .space {
   height: 50px; }
 
+.space-min {
+  height: 12px; }
+
+button {
+  cursor: pointer; }
+
 .background {
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -22,7 +28,8 @@
   align-items: center;
   text-align: center;
   width: 600px;
-  height: 900px; }
+  height: 850px;
+  background-size: 100% 100%; }
   .invitation__title, .invitation__name, .invitation__description, .invitation__time, .invitation__location {
     word-wrap: break-word;
     border: none;

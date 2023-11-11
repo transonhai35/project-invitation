@@ -13,7 +13,7 @@
               <span id="full-name"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/me/stored/cards">Thiệp mời của tôi</a>
+              <a class="dropdown-item" id="stored-cards">Thiệp mời của tôi</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/me/my-home">Tạo một thiệp mời</a>
             <div class="dropdown-divider"></div>
@@ -26,10 +26,18 @@
 </nav>
 
 <script> 
-      window.onload = function() {
-  // Retrieve user name
   var account =  JSON.parse(localStorage.getItem('account'));
+  let author = account.id;
   let fullName = document.getElementById('full-name');
-  fullName.innerText = account.fullName;
-}
+  window.onload = function() {
+    fullName.innerText = account.fullName;
+  }
+  let storedCards = document.getElementById('stored-cards');
+  storedCards.href = 'stored/cards' + '/' + author;
+
+     let logout = document.getElementById('logout');
+  logout.onclick = () => {
+    localStorage.removeItem('account');
+  }
+
 </script>

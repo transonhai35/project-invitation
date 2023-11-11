@@ -6,7 +6,6 @@ const app = express();
 const port = 3200;
 var methodOverride = require('method-override');
 
-
 const route = require('./routes/indexRoute');
 const db = require('./config/db/indexDb');
 
@@ -18,29 +17,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(
     express.urlencoded({
         extended: true,
-        
     }),
 );
 app.use(express.json());
 
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
 
 // HTTP logger
 // app.use(morgan("combined"));
 
 // Template engine
-        app.engine(
+app.engine(
     'hbs',
     engine({
         extname: '.hbs',
-        helpers:{
+        helpers: {
             sum: (a, b) => a + b,
-        }
+        },
     }),
 );
 
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources','views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 //Route init
 route(app);

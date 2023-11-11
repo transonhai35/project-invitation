@@ -1,63 +1,161 @@
 <header>
-  {{> me-header}}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">My Web</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="https://i.pinimg.com/564x/8f/33/30/8f3330d6163782b88b506d396f5d156f.jpg" alt="" class="user-avatar">
+              <span id="full-name"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" id="stored-cards">Thiệp mời của tôi</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/me/my-home">Tạo một thiệp mời</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" id="logout" href="/">Đăng xuất</a>
+          </div>
+        </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
 </header>
 
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Kiểu chữ</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option selected>Kiểu...</option>
+    <option value="1">math</option>
+    <option value="2">Copperlove by Resistenza</option>
+    <option value="3">Noelan Script</option>
+  </select>
+</div>
 
 <div class="mt-4 invitation__container">
             <div class="invitation" style="background-image: url('{{card.image}}');">
                 <div class="space"></div>
+                <div class="space"></div>
+                <div class="space"></div>
+                <div class="space"></div>
+                <div class="space-min"></div>  
+                <div class="space-min"></div>  
                 <form class="invitation__cards" id="formdata">
-
                     <div class="form-group">
-                        <input type="text" class="form-control invitation__title hidden-border" id="title" name="title" value="Thiệp mời">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name">Trân trọng kính mời </label>
                         <textarea type="text" class="form-control hidden-border invitation__name" id="name" name="name">{{card.name}}</textarea> 
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-control invitation__description hidden-border" id="description" name="description">{{card.description}}</textarea>
-                    </div>
-
+                    <div class="space"></div>
+                    <div class="space-min"></div>  
                    <div class="form-group">
-                        <label for="time">Tập thể lớp</label>
                         <textarea type="text" class="form-control invitation__time  hidden-border" id="grade" name="time">{{card.grade}}</textarea>
                     </div>
+                    <div class="space-min"></div>  
+                    <div class="space-min"></div>  
                     <div class="form-group">
-                        <label for="time">Niên khóa</label>
                         <textarea type="text" class="form-control invitation__time  hidden-border" id="school-year" name="time">{{card.schoolYear}}</textarea>
                      </div>
                     <div class="form-group">
-                            <label for="time">Trường</label>
                             <textarea type="text" class="form-control invitation__time  hidden-border" id="school-name" name="time">{{card.schoolName}}</textarea>
                         </div>
                     <div class="row">
-                        <div class="form-group col-lg-6">
-                            <label for="time">Thời gian</label>
+                        <div class="form-group">
                             <textarea type="text" class="form-control invitation__time  hidden-border" id="time" name="time">{{card.time}}</textarea>
                         </div>
-                        <div class="form-group col-lg-6">
-                            <label for="location">Địa điểm</label>
+                        <div class="form-group">
                             <textarea type="text" class="form-control invitation__location hidden-border" id="location" name="location">{{card.location}}</textarea>
                         </div>
                     </div>
-                    <p class="invitation__footer">Rất hân hạnh được đón tiếp</p>
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </form>
         </div>
     </div>
 </div>
+<div class="space-min"></div>
+
+<form enctype="multipart/form-data">
+  <input id="upload" type=file name="files[]">
+</form>
+
+<div class="space-min"></div>
+
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
   'use strict';
+    let fontStyle;
+    let fileName;
+  var form = document.getElementById('formdata');
+  let inputGroupSelect01 = document.getElementById('inputGroupSelect01');
   let account = JSON.parse(localStorage.getItem('account'));
   let id = window.location.href.split('/').pop().split('?').toString();
+
+  let author = account.id;
+  let fullName = document.getElementById('full-name');
+  window.onload = function() {
+    fullName.innerText = account.fullName;
+  }
+  let storedCards = document.getElementById('stored-cards');
+  storedCards.href = '/me/stored/cards' + '/' + author;
+
+     let logout = document.getElementById('logout');
+  logout.onclick = () => {
+    localStorage.removeItem('account');
+  }
+
+    inputGroupSelect01.onclick = function(){
+        form.style.fontFamily = '';
+        form.style.fontFamily = inputGroupSelect01.options[inputGroupSelect01.selectedIndex].text;
+        fontStyle = inputGroupSelect01.options[inputGroupSelect01.selectedIndex].text;
+  }
+
+  //parse ecel to object
+    document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+  var ExcelToJSON = function() {
+
+    this.parseExcel = function(file) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var data = e.target.result;
+        var workbook = XLSX.read(data, {
+          type: 'binary'
+        });
+        workbook.SheetNames.forEach(function(sheetName) {
+          // Here is your object
+          var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+          var json_object = JSON.stringify(XL_row_object);
+          jQuery('#xlx_json').val(json_object);
+          fileName = JSON.parse(json_object);
+        })
+      };
+
+      reader.onerror = function(ex) {
+        console.log(ex);
+      };
+
+      reader.readAsBinaryString(file);
+    };
+  };
+
+  function handleFileSelect(evt) {
+
+    var files = evt.target.files; // FileList object
+    var xl2json = new ExcelToJSON();
+    xl2json.parseExcel(files[0]);
+  }
+
   window.addEventListener('load', function() {
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var form = document.getElementById('formdata');
     // Loop over them and prevent submission
 
       form.addEventListener('submit', function(event) {
@@ -66,16 +164,17 @@
             url: '/cards/:id',
             data: {
                 params: id,
-                title: document.getElementById('title').value,
                 name: document.getElementById('name').value,
                 grade: document.getElementById('grade').value,
                 schoolYear: document.getElementById('school-year').value,
                 schoolName: document.getElementById('school-name').value,
                 time: document.getElementById('time').value,
                 location: document.getElementById('location').value,
+                fontFamily: fontStyle,
                 author:  account.id,
                 image:'{{card.image}}',
-                role: '652138dc28e0d13170a35c23'
+                role: '652138dc28e0d13170a35c23',
+                fileName: fileName
             }
         }).then(res => {
             window.location.href = "/me/my-home";
@@ -86,3 +185,8 @@
   }, false);
 })();
 </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+

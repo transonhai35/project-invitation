@@ -1,48 +1,54 @@
 @import 'variables';
 
-.space{
+.space {
     height: 50px;
 }
+.space-min {
+    height: 12px;
+}
 
+button {
+    cursor: pointer;
+}
 
-.background{
+.background {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
 }
 
 .invitation-card-item {
-   margin-top: 12px;
+    margin-top: 12px;
 }
 
-.user-avatar{
+.user-avatar {
     width: 28px;
     height: 30px;
     border-radius: 50%;
     margin-right: 4px;
 }
 
-
-.invitation{
+.invitation {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 600px;
-    height: 900px;
+    height: 850px;
+    background-size: 100% 100%;
     &__title,
     &__name,
     &__description,
     &__time,
-    &__location{
+    &__location {
         word-wrap: break-word;
         border: none;
         text-align: center;
         outline: none;
         background: transparent;
     }
-    &__container{
+    &__container {
         display: flex;
         display: flex;
         flex-direction: column;
@@ -50,7 +56,7 @@
         align-items: center;
         text-align: center;
     }
-    &__title{
+    &__title {
         font-weight: 700;
         font-size: 30px;
     }
