@@ -2,64 +2,8 @@
 
 
 
-<content class="background" style="background-image: url('/img/main-bg.jpg');">
-
-  <table class="table" id="ex-table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-  <button id="dl-pdf">dowload as pdf</button>
+<content class="background">
+  <img src="/img/main-img3.jpg" class="home-img" alt="">
 </content>
 
-<script>
-    window.onload = function() {
-  // Retrieve user name
-  var name = localStorage.getItem('account');
-  if (name!== null){
-    window.location.href = "/me/my-home"
-  }
-}
-</script>
-
-
-<script>
-  document.getElementById('dl-pdf').onclick = function()  {
-    var element = document.getElementById('ex-table');
-    var opt = {
-      margin: 1,
-      filename: 'myfile.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      htmlcanvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-
-    html2pdf(element, opt);
-  };
-</script>
 

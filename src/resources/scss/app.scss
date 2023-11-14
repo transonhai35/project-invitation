@@ -12,13 +12,16 @@ button {
 }
 
 .background {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: 100% 100%;
 }
 
 .invitation-card-item {
     margin-top: 12px;
+}
+
+.home-img{
+    width: 100%;
+    height: inherit;
 }
 
 .user-avatar {
