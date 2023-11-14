@@ -4,7 +4,6 @@ const {
     mongooseToObject,
     mutipleMongooseToObject,
 } = require('../../util/mongooseUtil');
-const { param } = require('../../routes/meRoute');
 
 class MeController {
     //[GET] /me/stored/courses
