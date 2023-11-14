@@ -41,26 +41,44 @@ class CourseController {
         } = req.body;
         if(fileName){
             fileName.map((data) => {
-                name = data.name
-            });
+                name = data.name;
+                const myInvitationCards = new MyInvitationCards({
+                    name,
+                    grade,
+                    schoolYear,
+                    schoolName,
+                    time,
+                    location,
+                    author,
+                    image,
+                    fontFamily,
+                    role,
+                });
+                myInvitationCards.save()
+                })
+                    res.status(200).json({
+                        msg: 'Đã khởi tạo',
+                    })
         }
-        const myInvitationCards = new MyInvitationCards({
-            name,
-            grade,
-            schoolYear,
-            schoolName,
-            time,
-            location,
-            author,
-            image,
-            fontFamily,
-            role,
-        });
-        myInvitationCards.save().then(
-            res.status(200).json({
-                msg: 'Đã khởi tạo',
-            }),
-        );
+        else {
+            const myInvitationCards = new MyInvitationCards({
+                name,
+                grade,
+                schoolYear,
+                schoolName,
+                time,
+                location,
+                author,
+                image,
+                fontFamily,
+                role,
+            });
+            myInvitationCards.save().then(
+                res.status(200).json({
+                    msg: 'Đã khởi tạo',
+                }),
+                );
+            }
     }
     //[DELETE] /cards/:id
     destroyCard(req, res, next) {
