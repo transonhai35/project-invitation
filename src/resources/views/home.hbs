@@ -7,3 +7,11 @@
 </content>
 
 
+<script>
+  let account = JSON.parse(localStorage.getItem('account'));
+    window.onload = function() {
+      if(account) {
+        window.location.href = "/me/my-home";
+      }
+  }
+</script>
