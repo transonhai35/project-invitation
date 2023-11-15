@@ -3,7 +3,7 @@ mongoose.set('strictQuery', false);
 
 async function connect() {
     try {
-        await mongoose.connect('mongodb://127.0.0.1/form_invitation_prod', {
+        await mongoose.connect('mongodb+srv://thiepmoi:Hai8042k2@test.zijw6qo.mongodb.net/', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
