@@ -6,8 +6,8 @@ const MyInvitationCards = require('../models/myInvitationCards');
 class CourseController {
     //[GET] /cards/:slug
     showCard(req, res, next) {
-        const invitationClassic = '651fd7721d136cf306d3ce59';
-        const invitationCards = '652138dc28e0d13170a35c23';
+        const invitationClassic = '6554f073be14c529eb44dcb2';
+        const invitationCards = '6554f073be14c529eb44dcb3';
         Course.findOne({ _id: req.params.id })
             .then((card) => {
                 if (req.params.id == invitationClassic) {
