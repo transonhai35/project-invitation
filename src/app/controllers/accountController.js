@@ -22,21 +22,22 @@ class AccountController {
                 res.status(500).json({
                     msg: 'Tài khoản này không tồn tại',
                 });
-            }
-            let validPassword = user.password == password;
-            if (!validPassword) {
-                res.status(500).json({
-                    msg: 'Mật khẩu bạn nhập không đúng',
-                });
-            }
-            if (user && validPassword) {
-                res.status(200).json({
-                    msg: {
-                        id: user._id,
-                        userName: user.userName,
-                        fullName: user.fullName,
-                    },
-                });
+            }else{
+                let validPassword = user.password == password;
+                if (!validPassword) {
+                    res.status(500).json({
+                        msg: 'Mật khẩu bạn nhập không đúng',
+                    });
+                }
+                if (user && validPassword) {
+                    res.status(200).json({
+                        msg: {
+                            id: user._id,
+                            userName: user.userName,
+                            fullName: user.fullName,
+                        },
+                    });
+                }
             }
         });
     }
